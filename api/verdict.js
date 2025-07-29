@@ -1,4 +1,4 @@
-const OpenAI = require('openai');
+import OpenAI from 'openai'; // ✅ 正確方式
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
