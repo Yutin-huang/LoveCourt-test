@@ -12,6 +12,12 @@ const crimeEl = document.querySelector(".verdict-crime");
 const suggestionEl = document.querySelector(".verdict-suggestion");
 const judgementEl = document.querySelector(".verdict-judgement");
 
+if (!complaint) {
+  verdictText.innerHTML = "⚠️ 請輸入你的戀愛控訴再上訴！";
+  return;
+}
+
+
 // ✅ 再上訴（重置畫面與音訊）
 retryBtn.addEventListener("click", () => {
   complaintInput.value = "";
