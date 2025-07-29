@@ -14,8 +14,10 @@ const judgementEl = document.querySelector(".verdict-judgement");
 
 if (!complaint) {
   verdictText.innerHTML = "⚠️ 請輸入你的戀愛控訴再上訴！";
+  verdictText.classList.remove("hidden");
   return;
 }
+
 
 
 // ✅ 再上訴（重置畫面與音訊）
@@ -87,20 +89,20 @@ submitBtn.addEventListener("click", async () => {
       loadingAnimation.classList.add("hidden");
       verdictText.classList.remove("hidden");
 
-      if (data.verdict && typeof data.verdict === "string") {
-        const lines = data.verdict.trim().split("\n");
-        const crimeLine = lines.find((line) => line.includes("被告被起訴為"));
-        const suggestionLine = lines.find((line) => line.includes("建議："));
-        const judgementLine = lines.find((line) => line.includes("判決："));
+   if (data.verdict && typeof data.verdict === "string") {
+    const lines = data.verdict.trim().split("\n");
+    const crimeLine = lines.find((line) =>line.includes("被告被起訴為") || line.includes("罪名"));
+    const suggestionLine = lines.find((line) =>line.includes("建議") || line.includes("懲罰建議"));
+    const judgementLine = lines.find((line) =>line.includes("判決") || line.includes("處罰"));
+    
+    crimeEl.textContent = crimeLine || "（未提供罪名）";
+    suggestionEl.textContent = suggestionLine || "";
+    judgementEl.textContent = judgementLine || "";
+  } else {crimeEl.textContent = "⚠️ 法官今天沒精神...請稍後再試。";
+    suggestionEl.textContent = "";
+    judgementEl.textContent = "";
+  }
 
-        crimeEl.textContent = crimeLine || "（未提供罪名）";
-        suggestionEl.textContent = suggestionLine || "";
-        judgementEl.textContent = judgementLine || "";
-      } else {
-        crimeEl.textContent = "⚠️ 法官今天沒精神...請稍後再試。";
-        suggestionEl.textContent = "";
-        judgementEl.textContent = "";
-      }
 
       retryBtn.classList.remove("hidden");
     } catch (err) {
