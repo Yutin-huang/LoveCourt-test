@@ -1,9 +1,7 @@
-// api/verdict.js
-
-import OpenAI from "openai";
+import OpenAI from 'openai';
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY, // 從環境變數讀取金鑰
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export default async function handler(req, res) {
