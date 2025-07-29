@@ -1,42 +1,40 @@
-const { OpenAI } = require("openai");
+const OpenAI = require('openai');
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Only POST method allowed' });
+  }
+
+  const { complaint } = req.body;
+
+  if (!complaint || typeof complaint !== 'string') {
+    return res.status(400).json({ error: 'Invalid complaint content' });
+  }
+
   try {
-    const { complaint } = req.body;
-
-    if (!complaint) {
-      return res.status(400).json({ error: "缺少控訴內容" });
-    }
-
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: 'gpt-4o',
       messages: [
         {
-          role: "system",
-          content: `你是一位戀愛法官，請根據使用者的控訴內容給出戀愛罪名，給予如心理諮商師般的建議與可愛的懲罰。請記得被判決對象都是「對方」。請使用以下格式回覆：
-
-被告被起訴為【罪名】
-建議：「」
-判決：本庭判定被告需「判決內容」
-請使用繁體中文回答，總字數不超過 100 字，語氣溫柔中帶點俏皮懲罰感。`,
+          role: 'system',
+          content: '你是戀愛法庭的法官，根據對方的戀愛罪狀，給出一個俏皮懲罰感的「戀愛判決書」建議。',
         },
         {
-          role: "user",
-          content: `${complaint}`,
+          role: 'user',
+          content: `被告被起訴為戀愛罪，罪狀是：「${complaint}」`,
         },
       ],
-      temperature: 0.9,
-      max_tokens: 100,
+      temperature: 0.8,
     });
 
-    const verdict = completion.choices?.[0]?.message?.content;
+    const verdict = completion.choices[0].message.content;
     res.status(200).json({ verdict });
-  } catch (err) {
-    console.error("❌ GPT 錯誤：", err);
-    res.status(500).json({ error: "GPT 無法處理請求" });
+  } catch (error) {
+    console.error('GPT API Error:', error);
+    res.status(500).json({ error: '系統錯誤，請稍後再試。' });
   }
 };

@@ -31,7 +31,7 @@ submitBtn.addEventListener("click", async () => {
   const complaint = complaintInput.value.trim();
   if (!complaint) return;
 
-  // ✅ 手機播放預授權（靜音播放再暫停）
+  // ✅ 手機預授權音樂播放（靜音播放再暫停）
   music.volume = 0;
   music.currentTime = 0;
   try {
@@ -66,7 +66,7 @@ submitBtn.addEventListener("click", async () => {
     });
   }, 4500);
 
-  // ✅ 顯示判決內容
+  // ✅ 顯示判決內容（呼叫 GPT）
   setTimeout(async () => {
     try {
       const response = await fetch("/api/verdict", {
@@ -108,5 +108,3 @@ submitBtn.addEventListener("click", async () => {
     }
   }, 2000); // 控制顯示時間
 });
-
-console.log("⚖️ 判決文字：", data.verdict);
