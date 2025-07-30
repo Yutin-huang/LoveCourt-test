@@ -156,6 +156,33 @@ html, body {
   margin-right: auto;
 }
 
+.verdict-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+/* ✅ 前往收聽按鈕 */
+.listen-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  font-size: 10px;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.listen-btn:hover {
+  background-color: #ffe6f0;
+  border-color: #ff99cc;
+}
+
+
 /* ✅ 動畫與通用設定 */
 .hidden {
   display: none !important;
