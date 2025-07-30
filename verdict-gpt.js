@@ -46,9 +46,17 @@ router.post("/", async (req, res) => {
     const verdict = completion.choices?.[0]?.message?.content;
     res.status(200).json({ verdict });
   } catch (err) {
-    console.error("GPT 錯誤：", err);
-    res.status(500).json({ error: "GPT 回應失敗" });
+  console.error("GPT 錯誤：", err.message);
+
+  // 如果是 OpenAI API 回傳錯誤
+  if (err.response) {
+    console.error("GPT response status:", err.response.status);
+    console.error("GPT response data:", err.response.data);
   }
+
+  res.status(500).json({ error: "GPT 回應失敗" });
+}
+
 });
 
 export default router;
