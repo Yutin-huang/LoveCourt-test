@@ -1,7 +1,6 @@
 import express from "express";
 import { OpenAI } from "openai";
 import dotenv from "dotenv";
-
 dotenv.config();
 console.log("DEBUG KEY:", process.env.OPENAI_API_KEY);
 
