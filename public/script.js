@@ -110,3 +110,23 @@ submitBtn.addEventListener("click", async () => {
     }
   }, 2000); // 控制顯示時間
 });
+
+
+// ✅ 長按截圖功能
+let pressTimer;
+const captureArea = document.getElementById("verdict-capture");
+
+captureArea.addEventListener("touchstart", function () {
+  pressTimer = setTimeout(() => {
+    html2canvas(captureArea).then(canvas => {
+      const link = document.createElement("a");
+      link.download = "戀愛判決書.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  }, 800); // 長按 800 毫秒
+});
+
+captureArea.addEventListener("touchend", function () {
+  clearTimeout(pressTimer);
+});

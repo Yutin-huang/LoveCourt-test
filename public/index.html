@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>戀愛法庭</title>
@@ -106,17 +107,20 @@
 
 <!-- ⚖️ 判決畫面 -->
 <div id="verdict-screen" class="verdict-popup hidden">
-  <div id="loading-animation" class="loading hidden">⚖️ 正在審判中...</div>
-  <div id="verdict-text" class="hidden">
-    <p class="verdict-title">🧑‍⚖️ 戀愛判決書</p>
-    <p class="verdict-crime"></p>
-    <p class="verdict-suggestion"></p>
-    <p class="verdict-judgement"></p>
+  <div id="verdict-capture"></div>
+   <div id="loading-animation" class="loading hidden">⚖️ 正在審判中...</div>
+   <div id="verdict-text" class="hidden">
+     <p class="verdict-title">🧑‍⚖️ 戀愛判決書</p>
+     <p class="verdict-crime"></p>
+     <p class="verdict-suggestion"></p>
+     <p class="verdict-judgement"></p>
+     <p style="font-size: 10px; color: #999; margin-top: 12px;">📸 長按此區域可儲存判決截圖</p>
 
     <!-- ✅ 新增按鈕區塊 -->
-    <div class="verdict-buttons">
-      <button id="retry-btn" class="retry-btn hidden">再上訴！</button>
-      <a href="https://linktr.ee/Yutin_Huang" target="_blank" class="listen-btn">前往收聽</a>
+     <div class="verdict-buttons">
+       <button id="retry-btn" class="retry-btn hidden">再上訴！</button>
+       <a href="https://linktr.ee/Yutin_Huang" target="_blank" class="listen-btn">前往收聽</a>
+     </div>
     </div>
   </div>
 </div>
