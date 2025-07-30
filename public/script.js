@@ -112,30 +112,23 @@ submitBtn.addEventListener("click", async () => {
 });
 
 
-// ✅ 長按截圖功能（修正版）
+// ✅ 只保留「點擊下載」按鈕功能
 document.addEventListener("DOMContentLoaded", () => {
-  const captureArea = document.getElementById("verdict-screen");
+  const downloadBtn = document.getElementById("download-btn");
+  const captureArea = document.querySelector(".responsive-wrapper");
 
-  if (!captureArea) {
-    console.warn("⚠️ 找不到 #verdict-capture 區塊！");
-    return;
-  }
-
-  let pressTimer;
-
-  captureArea.addEventListener("touchstart", function () {
-    pressTimer = setTimeout(() => {
-      html2canvas(captureArea).then(canvas => {
+  if (downloadBtn && captureArea) {
+    downloadBtn.addEventListener("click", () => {
+      html2canvas(captureArea, {
+        useCORS: true,
+        backgroundColor: null, // ✅ 保留 CSS 背景圖
+      }).then((canvas) => {
         const link = document.createElement("a");
         link.download = "戀愛判決書.png";
         link.href = canvas.toDataURL("image/png");
         link.click();
+        alert("✅ 戀愛判決書已儲存到相簿！");
       });
-    }, 800); // 長按 800 毫秒
-  });
-
-  captureArea.addEventListener("touchend", function () {
-    clearTimeout(pressTimer);
-  });
+    });
+  }
 });
-
