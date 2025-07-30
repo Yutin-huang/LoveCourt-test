@@ -114,7 +114,7 @@ submitBtn.addEventListener("click", async () => {
 
 // ✅ 長按截圖功能（修正版）
 document.addEventListener("DOMContentLoaded", () => {
-  const captureArea = document.getElementById("verdict-capture");
+  const captureArea = document.getElementById("verdict-screen");
 
   if (!captureArea) {
     console.warn("⚠️ 找不到 #verdict-capture 區塊！");
