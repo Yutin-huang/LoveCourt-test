@@ -1,10 +1,9 @@
 import express from "express";
 import path from "path";
 import dotenv from "dotenv";
-import verdictGPT from "./verdict-gpt.js";
-import { fileURLToPath } from "url";
-
 dotenv.config();
+import verdictRouter from "./verdict-gpt.js";
+import { fileURLToPath } from "url";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -14,8 +13,8 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
-// GPT API 路由
-app.use(verdictGPT);
+// GPT API 路由：掛載在 /api/verdict
+app.use("/api/verdict", verdictRouter);
 
 // 首頁
 app.get("/", (req, res) => {
