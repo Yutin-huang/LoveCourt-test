@@ -38,6 +38,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
-git add .
-git commit -m "✨ 新增後台戀愛判決紀錄頁面"
-git push origin main
+
+import logRouter from './routes/log.js';
+app.use('/', logRouter);

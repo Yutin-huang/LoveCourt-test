@@ -1,6 +1,10 @@
-import Verdict from "./models/Verdict.js"; // 確保有引入 Verdict 模型
+// routes/log.js
+import express from 'express';
+import Verdict from '../models/Verdict.js'; // ⬅️ 注意路徑要從 routes 夾往上找
 
-app.get("/verdicts-log", async (req, res) => {
+const router = express.Router();
+
+router.get("/verdicts-log", async (req, res) => {
   try {
     const verdicts = await Verdict.find().sort({ createdAt: -1 }).limit(100); // 顯示最新100筆
     let html = `
@@ -44,3 +48,5 @@ app.get("/verdicts-log", async (req, res) => {
     res.status(500).send("⚠️ 後台資料讀取錯誤");
   }
 });
+
+export default router;
