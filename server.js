@@ -39,5 +39,3 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
 
-import logRouter from './routes/log.js';
-app.use('/', logRouter);
