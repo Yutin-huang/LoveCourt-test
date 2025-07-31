@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import verdictRouter from './verdict-gpt.js';
+import logRouter from './routes/log.js'; // ✅ 加在前面，不要放在 app.listen 後
 
 // ✅ 初始化
 dotenv.config();
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 // ✅ 路由設定
-app.use('/api/verdict', verdictRouter);
+app.use('/api/verdict', verdictRouter); // AI 判決 API
+app.use('/', logRouter);                // 後台紀錄頁面
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
@@ -36,3 +38,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+git add .
+git commit -m "✨ 新增後台戀愛判決紀錄頁面"
+git push origin main
