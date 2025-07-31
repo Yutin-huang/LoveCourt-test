@@ -112,23 +112,3 @@ submitBtn.addEventListener("click", async () => {
 });
 
 
-// ✅ 只保留「點擊下載」按鈕功能
-document.addEventListener("DOMContentLoaded", () => {
-  const downloadBtn = document.getElementById("download-btn");
-  const captureArea = document.querySelector(".responsive-wrapper");
-
-  if (downloadBtn && captureArea) {
-    downloadBtn.addEventListener("click", () => {
-      html2canvas(captureArea, {
-        useCORS: true,
-        backgroundColor: null, // ✅ 保留 CSS 背景圖
-      }).then((canvas) => {
-        const link = document.createElement("a");
-        link.download = "戀愛判決書.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-        alert("✅ 戀愛判決書已儲存到相簿！");
-      });
-    });
-  }
-});
