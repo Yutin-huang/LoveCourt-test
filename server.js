@@ -39,3 +39,4 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
 
+console.log("ENV CHECK:", process.env.MONGO_URI);
