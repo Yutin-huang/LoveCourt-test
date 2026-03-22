@@ -1,12 +1,14 @@
 // ✅ ES Module 語法
+import 'dotenv/config';
+console.log("KEY:", process.env.OPENAI_API_KEY);
+import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import verdictRouter from './verdict-gpt.js';
-import logRouter from './routes/log.js'; // ✅ 加在前面，不要放在 app.listen 後
+import logRouter from './routes/log.js';
 
 // ✅ 初始化
 dotenv.config();
